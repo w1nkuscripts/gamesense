@@ -158,8 +158,8 @@ getgenv().Loaded = true
             return getcustomasset(Name .. ".font");
         end
         
-        local Verdana = RegisterFont("Verawdawdawdwaddana", 400, "Normal", {
-            Id = "Verdanawdawdwada.ttf",
+        local Verdana = RegisterFont("VerdanaCustom", 400, "Normal", {
+            Id = "VerdanaCustom.ttf",
             Font = game:HttpGet("https://github.com/i77lhm/storage/raw/refs/heads/main/fonts/fs-tahoma-8px.ttf"),
         })
 
@@ -2132,7 +2132,7 @@ getgenv().Loaded = true
                 PlaceHolder = properties.PlaceHolder or "Type here...";
                 Default = properties.Default or "";
                 Flag = properties.Flag or properties.Name or "TextBox";
-                Callback = properties.Callback or function() end;
+                Callback = properties.Callback or function() end,
                 Clear = properties.ClearTextOnFocus or false;
                 Items = {};
             }
