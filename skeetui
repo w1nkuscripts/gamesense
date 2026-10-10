@@ -397,12 +397,11 @@ getgenv().Loaded = true
                 Flag = properties.Flag or properties.Name or "Colorpicker",
                 Callback = properties.Callback or function() end,
 
-                Color = properties.Color or color(1, 1, 1), -- Default to white color if not provided
+                Color = properties.Color or color(1, 1, 1), 
                 Alpha = properties.Alpha or properties.Transparency or 0,
                 
-                Mode = properties.Mode or "Keypicker"; -- Animation
+                Mode = properties.Mode or "Keypicker";
 
-                -- Other
                 Open = false, 
                 Items = {};
             }
@@ -443,7 +442,7 @@ getgenv().Loaded = true
                     
                     Library:Create( "UIGradient" , {
                         Rotation = 90;
-                        Parent = Items.Inner;
+                        Parent = Items.InnerObject;
                         Color = rgbseq{rgbkey(0, rgb(255, 255, 255)), rgbkey(1, rgb(208, 208, 208))}
                     });
                 --
@@ -907,7 +906,7 @@ getgenv().Loaded = true
                     Items.Window = Library:Create( "Frame" , {
                         Parent = Library.Items;
                         Name = "\0";
-                        Visible = false;
+                        Visible = true;
                         Position = dim2(0.5, -Cfg.Size.X.Offset / 2, 0.5, -Cfg.Size.Y.Offset / 2);
                         BorderColor3 = rgb(0, 0, 0);
                         Size = Cfg.Size;
@@ -1362,10 +1361,8 @@ getgenv().Loaded = true
                 Name = properties.name or properties.Name or "Section"; 
                 Side = properties.side or properties.Side or "Left";
 
-                -- Fill settings 
                 Size = properties.size or properties.Size or 1;
                 
-                -- Other
                 Items = {};
             };
             
@@ -1652,9 +1649,7 @@ getgenv().Loaded = true
             
             function Cfg.Set(bool)
                 Flags[Cfg.Flag] = bool
-
                 Cfg.Callback(bool)
-
                 Library:Tween(Items.Accent, {BackgroundTransparency = bool and 0 or 1})
             end 
             
@@ -1664,7 +1659,6 @@ getgenv().Loaded = true
             end)
 
             Cfg.Set(Cfg.Enabled)
-
             ConfigFlags[Cfg.Flag] = Cfg.Set
 
             return setmetatable(Cfg, Library)
@@ -1838,13 +1832,11 @@ getgenv().Loaded = true
 
             Items.Minus.MouseButton1Down:Connect(function()
                 Cfg.Value -= Cfg.Intervals
-
                 Cfg.Set(Cfg.Value)
             end)
 
             Items.Plus.MouseButton1Down:Connect(function()
                 Cfg.Value += Cfg.Intervals
-
                 Cfg.Set(Cfg.Value)
             end)
 
@@ -2757,11 +2749,9 @@ getgenv().Loaded = true
             ConfigHolder = Section:Dropdown({Name = "Configs", Options = {"Report"}, Callback = function(option) if Text then Text.Set(option) end end, Flag = "config_name_list"})
             Library:UpdateConfigList()
 
-            window.Tweening = true
             Text = Section:Textbox({Name = "Config Name:", Flag = "config_name_text", Callback = function(text)
                 ConfigText = text
             end})
-            window.Tweening = false
 
             Section:Button({Name = "Save", Callback = function() 
                 if ConfigText then
@@ -2787,15 +2777,9 @@ getgenv().Loaded = true
                 end
             end})
 
-            window.Tweening = true
             Section:Label({Name = "Menu Bind"}):Keybind({Name = "Menu Bind", ShowInList = false, Callback = function(bool) 
-                if window.Tweening then
-                    return 
-                end 
                 window.ToggleMenu(bool) 
             end, Default = true})
-
-            task.delay(2, function() window.Tweening = false end)
         end
     --
 
@@ -2939,19 +2923,5 @@ getgenv().Loaded = true
         end
     --
 -- 
-
-local Window = Library:Window({})
-
-local Tabs = {
-    Rage = Window:Tab({Icon = "rbxassetid://8547236654"}),
-    Aiming = Window:Tab({Icon = "rbxassetid://8547249956"}),
-    Lighting = Window:Tab({Icon = "rbxassetid://8547254518"}),
-    Settings = Window:Tab({Icon = "rbxassetid://8547256547"}),
-    Skins = Window:Tab({Icon = "rbxassetid://8547258459"}),
-    Saving = Window:Tab({Icon = "rbxassetid://107672994153530"}),
-    Lua = Window:Tab({Icon = "rbxassetid://83653738255058"}),
-}
-
-Library:Configs(Window)
 
 return Library
