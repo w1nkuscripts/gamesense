@@ -1249,13 +1249,16 @@ getgenv().Loaded = true
                     BackgroundColor3 = rgb(0, 0, 0)
                 });
                 
-                Items.Page = Library:Create( "Frame" , {
+                Items.Page = Library:Create( "ScrollingFrame" , {
                     Parent = self.Items.PageHolder;
                     BackgroundTransparency = 1;
                     Name = "\0";
                     BorderColor3 = rgb(0, 0, 0);
                     Size = dim2(1, 0, 1, 0);
                     BorderSizePixel = 0;
+                    AutomaticCanvasSize = Enum.AutomaticSize.Y;
+                    CanvasSize = dim2(0, 0, 0, 0);
+                    ScrollBarThickness = 0;
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
                 
@@ -1283,12 +1286,12 @@ getgenv().Loaded = true
                     BorderColor3 = rgb(0, 0, 0);
                     Size = dim2(0, 100, 0, 100);
                     BorderSizePixel = 0;
+                    AutomaticSize = Enum.AutomaticSize.Y;
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
                 Library:Create( "UIListLayout" , {
                     SortOrder = Enum.SortOrder.LayoutOrder;
-                    VerticalFlex = Cfg.RightFill and Enum.UIFlexAlignment.Fill or Enum.UIFlexAlignment.None;
                     Parent = Items.Left;
                     Padding = dim(0, 19);
                 });
@@ -1300,12 +1303,12 @@ getgenv().Loaded = true
                     BorderColor3 = rgb(0, 0, 0);
                     Size = dim2(0, 100, 0, 100);
                     BorderSizePixel = 0;
+                    AutomaticSize = Enum.AutomaticSize.Y;
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
                 Library:Create( "UIListLayout" , {
                     SortOrder = Enum.SortOrder.LayoutOrder;
-                    VerticalFlex = Cfg.LeftFill and Enum.UIFlexAlignment.Fill or Enum.UIFlexAlignment.None;
                     Parent = Items.Right;
                     Padding = dim(0, 19);
                 });
@@ -1354,7 +1357,8 @@ getgenv().Loaded = true
                     Name = "\0";
                     Parent = self.Items[Cfg.Side];
                     BorderColor3 = rgb(0, 0, 0);
-                    Size = dim2(1, 0, Cfg.Size, 0);
+                    Size = dim2(1, 0, 0, 0);
+                    AutomaticSize = Enum.AutomaticSize.Y;
                     BorderSizePixel = 0;
                     BackgroundColor3 = rgb(12, 12, 12)
                 });
@@ -1365,6 +1369,7 @@ getgenv().Loaded = true
                     Position = dim2(0, 1, 0, 1);
                     BorderColor3 = rgb(0, 0, 0);
                     Size = dim2(1, -2, 1, -2);
+                    AutomaticSize = Enum.AutomaticSize.Y;
                     BorderSizePixel = 0;
                     BackgroundColor3 = rgb(40, 40, 40)
                 });
@@ -1375,6 +1380,7 @@ getgenv().Loaded = true
                     Position = dim2(0, 1, 0, 1);
                     BorderColor3 = rgb(0, 0, 0);
                     Size = dim2(1, -2, 1, -2);
+                    AutomaticSize = Enum.AutomaticSize.Y;
                     BorderSizePixel = 0;
                     BackgroundColor3 = rgb(23, 23, 23)
                 });
@@ -1420,23 +1426,17 @@ getgenv().Loaded = true
                     BackgroundColor3 = rgb(23, 23, 23)
                 });
                 
-                Items.Holder = Library:Create( "ScrollingFrame" , {
+                Items.Holder = Library:Create( "Frame" , {
                     Active = true;
-                    AutomaticCanvasSize = Enum.AutomaticSize.Y;
+                    AutomaticSize = Enum.AutomaticSize.Y;
                     ZIndex = 2;
                     BorderSizePixel = 0;
-                    CanvasSize = dim2(0, 0, 0, 0);
-                    ScrollBarImageColor3 = rgb(65, 65, 65);
-                    MidImage = "rbxassetid://74268315755026";
                     BorderColor3 = rgb(0, 0, 0);
-                    ScrollBarThickness = 4;
                     Parent = Items.Background;
                     Name = "\0";
                     BackgroundTransparency = 1;
                     Position = dim2(0, 0, 0, 1);
-                    Size = dim2(1, -1, 1, -1);
-                    BottomImage = "rbxassetid://74268315755026";
-                    TopImage = "rbxassetid://74268315755026";
+                    Size = dim2(1, 0, 0, 0);
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
                 
@@ -1445,8 +1445,8 @@ getgenv().Loaded = true
                     Parent = Items.Holder;
                     Name = "\0";
                     BackgroundTransparency = 1;
-                    Position = dim2(0, 20, 0, 19);
-                    Size = dim2(1, -42, 0, 0);
+                    Position = dim2(0, 20, 0, 15);
+                    Size = dim2(1, -40, 0, 0);
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.Y;
                     BackgroundColor3 = rgb(255, 255, 255)
@@ -1454,8 +1454,13 @@ getgenv().Loaded = true
                 
                 Library:Create( "UIListLayout" , {
                     Parent = Items.Elements;
-                    Padding = dim(0, 8);
+                    Padding = dim(0, 12);
                     SortOrder = Enum.SortOrder.LayoutOrder
+                });
+
+                Library:Create( "UIPadding" , {
+                    Parent = Items.Holder;
+                    PaddingBottom = dim(0, 15)
                 });
             end 
 
@@ -1480,7 +1485,7 @@ getgenv().Loaded = true
                     Parent = self.Items.Elements;
                     BackgroundTransparency = 1;
                     Name = "\0";
-                    Size = dim2(1, 0, 0, 8);
+                    Size = dim2(1, 0, 0, 12);
                     Selectable = false;
                     BorderSizePixel = 0;
                     BackgroundColor3 = rgb(255, 255, 255)
@@ -1513,7 +1518,7 @@ getgenv().Loaded = true
                     Name = "\0";
                     AutomaticSize = Enum.AutomaticSize.XY;
                     BackgroundTransparency = 1;
-                    Position = dim2(0, 19, 0, -4);
+                    Position = dim2(0, 0, 0, 0);
                     BorderSizePixel = 0;
                     ZIndex = 2;
                     TextSize = 13;
@@ -1523,6 +1528,8 @@ getgenv().Loaded = true
                 Items.Holder = Library:Create( "Frame" , {
                     Name = "\0";
                     Parent = Items.Toggle;
+                    AnchorPoint = vec2(1, 0.5);
+                    Position = dim2(1, -25, 0.5, 0);
                     BorderColor3 = rgb(0, 0, 0);
                     Size = dim2(0, 8, 0, 8);
                     BorderSizePixel = 0;
@@ -1606,7 +1613,7 @@ getgenv().Loaded = true
                     Parent = self.Items.Elements;
                     Name = "\0";
                     BackgroundTransparency = 1;
-                    Size = dim2(1, 0, 0, 22);
+                    Size = dim2(1, 0, 0, Cfg.Name and 32 or 16);
                     Selectable = false;
                     BorderSizePixel = 0;
                     BackgroundColor3 = rgb(255, 255, 255)
@@ -1622,7 +1629,7 @@ getgenv().Loaded = true
                         Name = "\0";
                         AutomaticSize = Enum.AutomaticSize.XY;
                         BackgroundTransparency = 1;
-                        Position = dim2(0, 21, 0, -2);
+                        Position = dim2(0, 0, 0, 0);
                         BorderSizePixel = 0;
                         ZIndex = 2;
                         TextSize = 13;
@@ -1635,9 +1642,9 @@ getgenv().Loaded = true
                     AutoButtonColor = false;
                     Text = "";
                     Name = "\0";
-                    Position = dim2(0, 20, 0, Cfg.Name and 14 or 0);
+                    Position = dim2(0, 0, 0, Cfg.Name and 18 or 4);
                     BorderColor3 = rgb(0, 0, 0);
-                    Size = dim2(1, -75, 0, 7);
+                    Size = dim2(1, -55, 0, 7);
                     BorderSizePixel = 0;
                     BackgroundColor3 = rgb(12, 12, 12)
                 });
@@ -1667,7 +1674,7 @@ getgenv().Loaded = true
                     Name = "\0";
                     AutoButtonColor = false;
                     BackgroundTransparency = 1;
-                    Position = dim2(1, -48, 0, Cfg.Name and 11 or -3);
+                    Position = dim2(1, -45, 0, Cfg.Name and 15 or 1);
                     Size = dim2(0, 12, 0, 12);
                     BorderSizePixel = 0;
                     ZIndex = 2;
@@ -1684,7 +1691,7 @@ getgenv().Loaded = true
                     Name = "\0";
                     AutoButtonColor = false;
                     BackgroundTransparency = 1;
-                    Position = dim2(1, -20, 0, Cfg.Name and 11 or -3);
+                    Position = dim2(1, -20, 0, Cfg.Name and 15 or 1);
                     Size = dim2(0, 12, 0, 12);
                     BorderSizePixel = 0;
                     ZIndex = 2;
@@ -1721,7 +1728,7 @@ getgenv().Loaded = true
                     AnchorPoint = vec2(1, 0);
                     BorderSizePixel = 0;
                     BackgroundTransparency = 1;
-                    Position = dim2(1, -33, 0, Cfg.Name and 10 or -3);
+                    Position = dim2(1, -33, 0, Cfg.Name and 14 or 0);
                     Active = false;
                     ZIndex = 2;
                     TextSize = 12;
@@ -1806,10 +1813,9 @@ getgenv().Loaded = true
                     Parent = self.Items.Elements;
                     Name = "\0";
                     BackgroundTransparency = 1;
-                    Size = dim2(1, 0, 0, 8);
+                    Size = dim2(1, 0, 0, 36);
                     Selectable = false;
                     BorderSizePixel = 0;
-                    AutomaticSize = Enum.AutomaticSize.Y;
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
                 
@@ -1822,7 +1828,7 @@ getgenv().Loaded = true
                     Name = "\0";
                     AutomaticSize = Enum.AutomaticSize.XY;
                     BackgroundTransparency = 1;
-                    Position = dim2(0, 20, 0, -2);
+                    Position = dim2(0, 0, 0, 0);
                     BorderSizePixel = 0;
                     ZIndex = 2;
                     TextSize = 13;
@@ -1834,9 +1840,9 @@ getgenv().Loaded = true
                     Text = "";
                     AutoButtonColor = false;
                     Name = "\0";
-                    Position = dim2(0, 20, 0, 13);
+                    Position = dim2(0, 0, 0, 16);
                     BorderColor3 = rgb(0, 0, 0);
-                    Size = dim2(1, -55, 0, 20);
+                    Size = dim2(1, 0, 0, 20);
                     BorderSizePixel = 0;
                     BackgroundColor3 = rgb(12, 12, 12)
                 });
@@ -1896,9 +1902,10 @@ getgenv().Loaded = true
                     Size = dim2(0, 132, 0, 47);
                     Name = "\0";
                     Visible = false;
-                    Position = dim2(0.699, 0, 0.370, 0);
+                    Position = dim2(0, 0, 0, 0);
                     BorderColor3 = rgb(0, 0, 0);
                     BorderSizePixel = 0;
+                    ZIndex = 4EntityId_or_something;
                     ZIndex = 4;
                     AutomaticSize = Enum.AutomaticSize.Y;
                     BackgroundColor3 = rgb(12, 12, 12)
@@ -1962,8 +1969,8 @@ getgenv().Loaded = true
                     Library:CloseElement()
                 end
 
-                Items.DropdownElements.Position = dim2(0, Items.Outline.AbsolutePosition.X, 0, Items.Outline.AbsolutePosition.Y + 80)
-				Items.DropdownElements.Size = dim_offset(Items.Outline.AbsoluteSize.X + 1, 0)
+                Items.DropdownElements.Position = dim2(0, Items.Outline.AbsolutePosition.X, 0, Items.Outline.AbsolutePosition.Y + Items.Outline.AbsoluteSize.Y + 4)
+				Items.DropdownElements.Size = dim_offset(Items.Outline.AbsoluteSize.X, 0)
                 Items.DropdownElements.Visible = bool
                 Items.DropdownElements.Parent = bool and Library.Items or Library.Other 
                 Items.Arrow.Rotation = bool and 180 or 0
@@ -2051,7 +2058,7 @@ getgenv().Loaded = true
                     Parent = self.Items.Elements;
                     Name = "\0";
                     BackgroundTransparency = 1;
-                    Size = dim2(1, 0, 0, 8);
+                    Size = dim2(1, 0, 0, 14);
                     BorderColor3 = rgb(0, 0, 0);
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.Y;
@@ -2063,7 +2070,7 @@ getgenv().Loaded = true
                     Parent = Items.Label;
                     ZIndex = 2;
                     TextSize = 13;
-                    Size = dim2(1, -55, 0, 0);
+                    Size = dim2(1, 0, 0, 0);
                     RichText = true;
                     TextColor3 = rgb(205, 205, 205);
                     BorderColor3 = rgb(0, 0, 0);
@@ -2072,7 +2079,7 @@ getgenv().Loaded = true
                     FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
                     BackgroundTransparency = 1;
                     TextXAlignment = Enum.TextXAlignment.Left;
-                    Position = dim2(0, 21, 0, -2);
+                    Position = dim2(0, 0, 0, 0);
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.Y;
                     BackgroundColor3 = rgb(255, 255, 255)
@@ -2148,18 +2155,35 @@ getgenv().Loaded = true
                     Parent = self.Items.Elements;
                     Name = "\0";
                     BackgroundTransparency = 1;
-                    Size = dim2(1, 0, 0, 10);
+                    Size = dim2(1, 0, 0, 36);
                     Selectable = false;
                     BorderSizePixel = 0;
-                    AutomaticSize = Enum.AutomaticSize.Y;
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
                 
+                if Cfg.Name then
+                    Items.Title = Library:Create( "TextLabel" , {
+                        FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                        TextColor3 = rgb(205, 205, 205);
+                        BorderColor3 = rgb(0, 0, 0);
+                        Text = Cfg.Name;
+                        Parent = Items.List;
+                        Name = "\0";
+                        AutomaticSize = Enum.AutomaticSize.XY;
+                        BackgroundTransparency = 1;
+                        Position = dim2(0, 0, 0, 0);
+                        BorderSizePixel = 0;
+                        ZIndex = 2;
+                        TextSize = 13;
+                        BackgroundColor3 = rgb(255, 255, 255)
+                    });
+                end
+
                 Items.Textbox = Library:Create( "Frame" , {
                     Parent = Items.List;
-                    Size = dim2(1, -55, 0, 20);
+                    Size = dim2(1, 0, 0, 20);
                     Name = "\0";
-                    Position = dim2(0, 20, 0, -1);
+                    Position = dim2(0, 0, 0, 16);
                     BorderColor3 = rgb(0, 0, 0);
                     ZIndex = 2;
                     BorderSizePixel = 0;
@@ -2399,7 +2423,7 @@ getgenv().Loaded = true
                     Parent = self.Items.Elements;
                     Name = "\0";
                     BackgroundTransparency = 1;
-                    Size = dim2(1, 0, 0, 0);
+                    Size = dim2(1, 0, 0, 18);
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.Y;
                     TextSize = 14;
@@ -2487,7 +2511,7 @@ getgenv().Loaded = true
             end})
 
             Section:Button({Name = "Delete", Callback = function() 
-                if ConfigText and isfile(Library.Directory .. "/configs/" .. ConfigText .. ".cfg") then
+                if ConfigText and isfile(Library.Directory .. "/configs/" .. ConfigTest .. ".cfg") then
                     delfile(Library.Directory .. "/configs/" .. ConfigText .. ".cfg")  
                     Library:UpdateConfigList() 
                 end
@@ -2525,7 +2549,7 @@ getgenv().Loaded = true
                     AnchorPoint = vec2(1, 0);
                     Position = dim2(0, 7, 0, 46);
                     BorderColor3 = rgb(0, 0, 0);
-                    BorderSizePixel = 0;
+                    BorderSizePixel =_0;
                     AutomaticSize = Enum.AutomaticSize.XY;
                     BackgroundColor3 = rgb(52, 52, 52)
                 });
@@ -2557,9 +2581,9 @@ getgenv().Loaded = true
                 });
             end 
             
-            local index = #Notifications.Notifs + 1
+            `local index = #Notifications.Notifs + 1
             Notifications.Notifs[index] = Items.Outline
-            local offset = Notifications:RefreshNotifications()
+            local offset = Notifications:`RefreshNotifications()
             Items.Outline.Position = dim_offset(20, offset)
 
             task.spawn(function()
